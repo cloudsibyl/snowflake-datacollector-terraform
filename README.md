@@ -51,8 +51,8 @@ make cloudsibyl
 8. Retrieve credentials
 You should be able to see the generated credentials in
 ```bash
-./aws-s3-bucket/cloudsibyl_role_info.txt
-./aws-s3-bucket/snowflake_credentials.txt
+./cloudsibyl_role_info.txt
+./snowflake_credentials.txt
 ```
 
 
