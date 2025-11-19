@@ -38,7 +38,7 @@ ctrl+o to write out, enter to save and ctrl+x to exit
 nano terraform.tfvars
 ```
 
-6. Create storage instance and grand read and write access to Snowflake:
+6. Create storage instance and grant read and write access to Snowflake:
 ```bash
 make snowflake
 ```

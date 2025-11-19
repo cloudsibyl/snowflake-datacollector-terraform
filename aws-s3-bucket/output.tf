@@ -1,7 +1,3 @@
-output "instruction" {
-  value = "Please see ./snowflake_credentials.txt for Snowflake to S3 credentials and instructions."
-}
-
 output "snowflake_to_s3_bucket" {
   description = "Name of the S3 bucket used to store Snowflake CUR reports"
   value       = aws_s3_bucket.snowflake_cur_reports.bucket
@@ -45,12 +41,13 @@ EOF
   #   file_permission = "0600"
 }
 
-output "cloudsibyl_read_role_arn" {
-  description = "IAM Role ARN to paste into the CloudSibyl console"
-  value       = aws_iam_role.cloudsibyl_read_role.arn
-}
+# output "cloudsibyl_read_role_arn" {
+#   value       = aws_iam_role.cloudsibyl_read_role[0].arn
+# }
 
 resource "local_file" "cloudsibyl_role_info" {
+  count = var.enable_cloudsibyl_access ? 1 : 0
+
   filename = "${path.module}/cloudsibyl_role_info.txt"
 
   content = <<EOF
@@ -58,7 +55,7 @@ resource "local_file" "cloudsibyl_role_info" {
 #  CloudSibyl AWS Integration – Required Fields
 # ============================================
 
-ARN         = ${aws_iam_role.cloudsibyl_read_role.arn}
+ARN         = ${aws_iam_role.cloudsibyl_read_role[0].arn}
 ExternalId  = ${var.cloudsibyl_external_id}
 BucketName  = ${aws_s3_bucket.snowflake_cur_reports.bucket}
 

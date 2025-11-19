@@ -48,6 +48,8 @@ resource "aws_iam_access_key" "snowflake_rw_key" {
 }
 
 resource "aws_iam_role" "cloudsibyl_read_role" {
+  count = var.enable_cloudsibyl_access ? 1 : 0
+
   name = "${var.org_name}-cloudsibyl-s3-readonly-role"
 
   assume_role_policy = jsonencode({
@@ -75,6 +77,8 @@ resource "aws_iam_role" "cloudsibyl_read_role" {
 }
 
 resource "aws_iam_policy" "cloudsibyl_s3_readonly" {
+  count = var.enable_cloudsibyl_access ? 1 : 0
+
   name = "${var.org_name}-cloudsibyl-s3-readonly-policy"
 
   policy = jsonencode({
@@ -99,6 +103,7 @@ resource "aws_iam_policy" "cloudsibyl_s3_readonly" {
 }
 
 resource "aws_iam_role_policy_attachment" "cloudsibyl_read_attach" {
-  role       = aws_iam_role.cloudsibyl_read_role.name
-  policy_arn = aws_iam_policy.cloudsibyl_s3_readonly.arn
+  count      = var.enable_cloudsibyl_access ? 1 : 0
+  role       = aws_iam_role.cloudsibyl_read_role[0].name
+  policy_arn = aws_iam_policy.cloudsibyl_s3_readonly[0].arn
 }
