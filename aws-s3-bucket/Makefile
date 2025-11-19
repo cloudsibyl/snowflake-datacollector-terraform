@@ -17,6 +17,10 @@ init:
 		echo "Terraform is already installed."; \
 	fi
 
+dryrun:
+	terraform init -input=false
+	terraform apply -input=false -auto-approve -var-file="$(TFVARS)" -var="enable_cloudsibyl_access=true"
+
 # ---------- RUN 1: Snowflake only ----------
 snowflake:
 	terraform init -input=false
