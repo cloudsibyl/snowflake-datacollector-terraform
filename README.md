@@ -25,7 +25,7 @@ git clone https://github.com/cloudsibyl/terraform-storage-provisioning.git
 
 3. Go to the terraform for aws directory:
 ```bash
-cd terraform-storage-provisionning/aws-s3-bucket
+cd snowflake-datacollector-terraform/aws-s3-bucket
 ```
 
 4. Install Terraform if not installed yet
