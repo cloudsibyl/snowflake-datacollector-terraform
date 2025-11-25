@@ -1,17 +1,17 @@
-output "snowflake_to_s3_bucket" {
-  description = "Name of the S3 bucket used to store Snowflake CUR reports"
-  value       = aws_s3_bucket.snowflake_cur_reports.bucket
-}
-output "snowflake_aws_access_key_id" {
-  description = "AWS access key ID for Snowflake user (use in Snowflake STAGE)"
-  value       = aws_iam_access_key.snowflake_rw_key.id
-}
+# output "snowflake_to_s3_bucket" {
+#   description = "Name of the S3 bucket used to store Snowflake CUR reports"
+#   value       = aws_s3_bucket.snowflake_cur_reports.bucket
+# }
+# output "snowflake_aws_access_key_id" {
+#   description = "AWS access key ID for Snowflake user (use in Snowflake STAGE)"
+#   value       = aws_iam_access_key.snowflake_rw_key.id
+# }
 
-output "snowflake_aws_secret_access_key" {
-  description = "AWS secret access key for Snowflake user (use in Snowflake STAGE)"
-  value       = aws_iam_access_key.snowflake_rw_key.secret
-  sensitive   = true
-}
+# output "snowflake_aws_secret_access_key" {
+#   description = "AWS secret access key for Snowflake user (use in Snowflake STAGE)"
+#   value       = aws_iam_access_key.snowflake_rw_key.secret
+#   sensitive   = true
+# }
 
 resource "local_file" "snowflake_rw_credentials" {
   filename = "${path.module}/snowflake_credentials.txt"
