@@ -9,9 +9,6 @@ TERRAFORM ?= /tmp/terraform-bin/terraform
 TF_DATA_DIR=/tmp/terraform-install
 
 # ---------- Install Terraform on Amazon Linux ----------
-test:
-	echo "Makefile is working"
-	TF_DATA_DIR=/tmp/terraform-install && echo "TF_DATA_DIR is set to $$TF_DATA_DIR"
 init:
 	mkdir -p /tmp/terraform-bin && \
 	cd /tmp/terraform-bin && \
