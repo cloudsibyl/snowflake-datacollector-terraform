@@ -4,38 +4,44 @@
 
 # Default tfvars file (can be overridden: make snowflake TFVARS=custom.tfvars)
 TFVARS ?= terraform.tfvars
+VERSION ?= 1.14.0
+TERRAFORM ?= /tmp/terraform-bin/terraform
+TF_DATA_DIR=/tmp/terraform-install
 
 # ---------- Install Terraform on Amazon Linux ----------
+test:
+	echo "Makefile is working"
+	TF_DATA_DIR=/tmp/terraform-install && echo "TF_DATA_DIR is set to $$TF_DATA_DIR"
 init:
-	@echo "Checking for Terraform installation..."
-	if ! command -v terraform >/dev/null 2>&1; then \
-		echo "Terraform not found. Installing..."; \
-		sudo yum install -y yum-utils && \
-		sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo && \
-		sudo yum -y install terraform; \
-	else \
-		echo "Terraform is already installed."; \
-	fi
+	mkdir -p /tmp/terraform-bin && \
+	cd /tmp/terraform-bin && \
+	curl -fsSL -o terraform.zip "https://releases.hashicorp.com/terraform/${VERSION}/terraform_${VERSION}_linux_amd64.zip" && \
+	unzip -o terraform.zip && \
+	chmod +x terraform && \
+	rm terraform.zip && \
+	/tmp/terraform-bin/terraform -version && \
+    mkdir -p /tmp/terraform-install && \
+    cd ~/snowflake-datacollector-terraform/aws-s3-bucket
 
 dryrun:
-	terraform init -input=false
-	terraform apply -input=false -auto-approve -var-file="$(TFVARS)" -var="enable_cloudsibyl_access=true"
+	TF_DATA_DIR=/tmp/terraform-install && $(TERRAFORM) init -input=false
+	TF_DATA_DIR=/tmp/terraform-install && $(TERRAFORM) apply -input=false -auto-approve -var-file="$(TFVARS)" -var="enable_cloudsibyl_access=true"
 
 # ---------- RUN 1: Snowflake only ----------
 snowflake:
-	terraform init -input=false
-	terraform apply -input=false -auto-approve -var-file="$(TFVARS)" -var="enable_cloudsibyl_access=false"
+	TF_DATA_DIR=/tmp/terraform-install && $(TERRAFORM) init -input=false
+	TF_DATA_DIR=/tmp/terraform-install && $(TERRAFORM) apply -input=false -auto-approve -var-file="$(TFVARS)" -var="enable_cloudsibyl_access=false"
 
 # ---------- RUN 2: Add CloudSibyl access ----------
 cloudsibyl:
-	terraform init -input=false
-	terraform apply -input=false -auto-approve -var-file="$(TFVARS)" -var="enable_cloudsibyl_access=true"
+	TF_DATA_DIR=/tmp/terraform-install && $(TERRAFORM) init -input=false
+	TF_DATA_DIR=/tmp/terraform-install && $(TERRAFORM) apply -input=false -auto-approve -var-file="$(TFVARS)" -var="enable_cloudsibyl_access=true"
 
 # ---------- Just show what would change ----------
 plan:
-	terraform init -input=false
-	terraform plan -input=false -var-file="$(TFVARS)"
+	TF_DATA_DIR=/tmp/terraform-install && $(TERRAFORM) init -input=false
+	TF_DATA_DIR=/tmp/terraform-install && $(TERRAFORM) plan -input=false -var-file="$(TFVARS)"
 
 # ---------- Destroy everything ----------
 destroy:
-	terraform destroy -input=false -auto-approve -var-file="$(TFVARS)"
+	TF_DATA_DIR=/tmp/terraform-install && $(TERRAFORM) destroy -input=false -auto-approve -var-file="$(TFVARS)"
