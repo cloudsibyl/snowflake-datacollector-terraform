@@ -37,8 +37,6 @@ AWS_SECRET_ACCESS_KEY = "${aws_iam_access_key.snowflake_rw_key.secret}"
 #   );
 #
 EOF
-
-  #   file_permission = "0600"
 }
 
 # output "cloudsibyl_read_role_arn" {
