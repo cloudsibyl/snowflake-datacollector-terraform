@@ -10,6 +10,7 @@ VERSION ?= 1.14.0
 TF_DATA_DIR=/tmp/terraform-data-dir
 TF_BIN_DIR=/tmp/terraform-bin
 TERRAFORM=${TF_BIN_DIR}/terraform
+TERRAFORM_INIT=export TF_DATA_DIR=${TF_DATA_DIR} && ${TERRAFORM} init -input=false > /dev/null
 
 # ---------- Install Terraform on Amazon Linux ----------
 init:
@@ -22,7 +23,7 @@ init:
 	${TERRAFORM} -version && \
     mkdir -p ${TF_DATA_DIR} && \
     cd ~/snowflake-datacollector-terraform/aws-s3-bucket && \
-	export TF_DATA_DIR=${TF_DATA_DIR} && ${TERRAFORM} init -input=false > /dev/null
+	${TERRAFORM_INIT}
 
 # ---------- RUN 1: Snowflake only ----------
 snowflake:
