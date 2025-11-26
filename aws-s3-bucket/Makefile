@@ -14,6 +14,7 @@ TERRAFORM_INIT=export TF_DATA_DIR=${TF_DATA_DIR} && ${TERRAFORM} init -input=fal
 
 # ---------- Install Terraform on Amazon Linux ----------
 init:
+	echo "Installing Terraform v${VERSION}..." && \
 	mkdir -p ${TF_BIN_DIR} && \
 	cd ${TF_BIN_DIR} && \
 	curl -fsSL -o terraform.zip "https://releases.hashicorp.com/terraform/${VERSION}/terraform_${VERSION}_linux_amd64.zip" && \
@@ -23,6 +24,7 @@ init:
 	${TERRAFORM} -version && \
     mkdir -p ${TF_DATA_DIR} && \
     cd ~/snowflake-datacollector-terraform/aws-s3-bucket && \
+	echo "Terraform Terraform on linux_amd64 installation completed." && \
 	${TERRAFORM_INIT}
 
 # ---------- RUN 1: Snowflake only ----------
