@@ -17,7 +17,7 @@ init:
 	mkdir -p ${TF_BIN_DIR} && \
 	cd ${TF_BIN_DIR} && \
 	curl -fsSL -o terraform.zip "https://releases.hashicorp.com/terraform/${VERSION}/terraform_${VERSION}_linux_amd64.zip" && \
-	unzip -o terraform.zip && \
+	unzip -o terraform.zip > /dev/null && \
 	chmod +x terraform && \
 	rm terraform.zip && \
 	${TERRAFORM} -version && \
