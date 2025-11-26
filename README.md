@@ -2,7 +2,7 @@
 Snowflake Data Collector
 
 
-## Optionally use Terraform to create storage on AWS, Azure or GCP
+## Use Terraform to create storage on AWS, Azure or GCP
 
 ## Authentication Methods Used
 
