@@ -7,20 +7,22 @@
 # Default tfvars file
 TFVARS ?= terraform.tfvars
 VERSION ?= 1.14.0
-TERRAFORM ?= /tmp/terraform-bin/terraform
 TF_DATA_DIR=/tmp/terraform-data-dir
+TF_BIN_DIR=/tmp/terraform-bin
+TERRAFORM=${TF_BIN_DIR}/terraform
 
 # ---------- Install Terraform on Amazon Linux ----------
 init:
-	mkdir -p /tmp/terraform-bin && \
-	cd /tmp/terraform-bin && \
+	mkdir -p ${TF_BIN_DIR} && \
+	cd ${TF_BIN_DIR} && \
 	curl -fsSL -o terraform.zip "https://releases.hashicorp.com/terraform/${VERSION}/terraform_${VERSION}_linux_amd64.zip" && \
 	unzip -o terraform.zip && \
 	chmod +x terraform && \
 	rm terraform.zip && \
-	/tmp/terraform-bin/terraform -version && \
-    mkdir -p /tmp/terraform-data-dir && \
-    cd ~/snowflake-datacollector-terraform/aws-s3-bucket
+	${TERRAFORM} -version && \
+    mkdir -p ${TF_DATA_DIR} && \
+    cd ~/snowflake-datacollector-terraform/aws-s3-bucket && \
+	TF_DATA_DIR=${TF_DATA_DIR} && ${TERRAFORM} init -input=false
 
 dryrun:
 	TF_DATA_DIR=/tmp/terraform-data-dir && $(TERRAFORM) init -input=false
