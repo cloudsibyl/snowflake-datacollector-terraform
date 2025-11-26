@@ -21,7 +21,7 @@ init:
 	unzip -o terraform.zip > /dev/null && \
 	chmod +x terraform && \
 	rm terraform.zip && \
-	${TERRAFORM} -version && \
+	${TERRAFORM} -version > /dev/null && \
     mkdir -p ${TF_DATA_DIR} && \
     cd ~/snowflake-datacollector-terraform/aws-s3-bucket && \
 	echo "Terraform Terraform on linux_amd64 installation completed." && \
