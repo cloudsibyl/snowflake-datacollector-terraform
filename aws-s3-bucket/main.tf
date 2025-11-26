@@ -1,8 +1,8 @@
 resource "aws_s3_bucket" "snowflake_cur_reports" {
-  bucket = "${var.org_name}-cur-reports"
+  bucket = "${var.org_name}-${var.infix}-cur-reports"
 
   tags = {
-    Name        = "${var.org_name}-cur-reports"
+    Name        = "${var.org_name}-${var.infix}-cur-reports"
     Environment = "dev"
     ManagedBy   = "terraform"
   }

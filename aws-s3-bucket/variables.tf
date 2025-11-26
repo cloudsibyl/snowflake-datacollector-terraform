@@ -9,6 +9,12 @@ variable "org_name" {
   type        = string
 }
 
+variable "infix" {
+  description = "Infix to use in resource names to avoid collisions"
+  type        = string
+  default     = "snowflake-aws"
+}
+
 variable "cloudsibyl_account_id" {
   description = "CloudSibyl AWS account ID"
   type        = string
