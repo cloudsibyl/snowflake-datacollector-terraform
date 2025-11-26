@@ -29,15 +29,23 @@ init:
 
 # ---------- RUN 1: Snowflake only ----------
 snowflake:
+	echo "Creating S3 bucket..." && \
 	export TF_DATA_DIR=${TF_DATA_DIR} && ${TERRAFORM} init -input=false > /dev/null && \
-	$(TERRAFORM) apply -input=false -auto-approve -var-file="$(TFVARS)" -var="enable_cloudsibyl_access=false" && \
+	$(TERRAFORM) apply -input=false -auto-approve -var-file="$(TFVARS)" -var="enable_cloudsibyl_access=false" > /dev/null && \
+	echo "S3 bucket created." && \
+	echo "Generating Snowflake credentials..." && \
+	echo "Keep these credentials secure as you won't be able to retrieve them again." && \
 	cat ./snowflake_credentials.txt && \
 	rm -f ./snowflake_credentials.txt
 
 # ---------- RUN 2: Add CloudSibyl access ----------
 cloudsibyl:
+	echo "Adding CloudSibyl access..." && \
 	export TF_DATA_DIR=${TF_DATA_DIR} && ${TERRAFORM} init -input=false > /dev/null && \
-	$(TERRAFORM) apply -input=false -auto-approve -var-file="$(TFVARS)" -var="enable_cloudsibyl_access=true" && \
+	$(TERRAFORM) apply -input=false -auto-approve -var-file="$(TFVARS)" -var="enable_cloudsibyl_access=true" > /dev/null && \
+	echo "CloudSibyl access added." && \
+	echo "Generating CloudSibyl role information..." && \
+	echo "Keep this information secure as you won't be able to retrieve it again." && \
 	cat ./cloudsibyl_role_info.txt && \
 	rm -f ./cloudsibyl_role_info.txt
 
