@@ -26,19 +26,17 @@ init:
 
 # ---------- RUN 1: Snowflake only ----------
 snowflake:
-	export TF_DATA_DIR=${TF_DATA_DIR} && ${TERRAFORM} init -input=false > /dev/null && \ 
-	$(TERRAFORM) apply -input=false -auto-approve -var-file="$(TFVARS)" -var="enable_cloudsibyl_access=false"
-	cat ./snowflake_credentials.txt
+	export TF_DATA_DIR=${TF_DATA_DIR} && ${TERRAFORM} init -input=false > /dev/null && \
+	$(TERRAFORM) apply -input=false -auto-approve -var-file="$(TFVARS)" -var="enable_cloudsibyl_access=false" && \
+	cat ./snowflake_credentials.txt && \
 	rm -f ./snowflake_credentials.txt
 
 # ---------- RUN 2: Add CloudSibyl access ----------
 cloudsibyl:
 	export TF_DATA_DIR=${TF_DATA_DIR} && ${TERRAFORM} init -input=false > /dev/null && \
-	$(TERRAFORM) apply -input=false -auto-approve -var-file="$(TFVARS)" -var="enable_cloudsibyl_access=true"
-	cat ./cloudsibyl_role_info.txt
+	$(TERRAFORM) apply -input=false -auto-approve -var-file="$(TFVARS)" -var="enable_cloudsibyl_access=true" && \
+	cat ./cloudsibyl_role_info.txt && \
 	rm -f ./cloudsibyl_role_info.txt
-
-runall: snowflake cloudsibyl
 
 # ---------- Just show what would change ----------
 plan:
