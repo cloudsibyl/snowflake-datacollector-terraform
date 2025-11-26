@@ -20,7 +20,7 @@ Snowflake Data Collector
 2. Clone this repository in current or desired directory:
 
 ```bash
-git clone https://github.com/cloudsibyl/terraform-storage-provisioning.git
+git clone https://github.com/cloudsibyl/snowflake-datacollector-terraform.git
 ```
 
 3. Go to the terraform for aws directory:
