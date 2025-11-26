@@ -22,7 +22,7 @@ init:
 	${TERRAFORM} -version && \
     mkdir -p ${TF_DATA_DIR} && \
     cd ~/snowflake-datacollector-terraform/aws-s3-bucket && \
-	TF_DATA_DIR=${TF_DATA_DIR} && ${TERRAFORM} init -input=false
+	echo "This iS the current TF_DATA_DIR: ${TF_DATA_DIR}"
 
 dryrun:
 	TF_DATA_DIR=/tmp/terraform-data-dir && $(TERRAFORM) init -input=false
