@@ -24,25 +24,18 @@ init:
     cd ~/snowflake-datacollector-terraform/aws-s3-bucket && \
 	export TF_DATA_DIR=${TF_DATA_DIR} && ${TERRAFORM} init -input=false
 
-destroy-credentials:
-	cd ~/snowflake-datacollector-terraform/aws-s3-bucket && \
-	rm -f ./snowflake_credentials.txt && \
-	rm -f ./cloudsibyl_role_info.txt
-
 # ---------- RUN 1: Snowflake only ----------
 snowflake:
 	export TF_DATA_DIR=${TF_DATA_DIR} && ${TERRAFORM} init -input=false && \
 	$(TERRAFORM) apply -input=false -auto-approve -var-file="$(TFVARS)" -var="enable_cloudsibyl_access=false"
-	cat ./snowflake_credentials.txt && \
-	cd ~/snowflake-datacollector-terraform/aws-s3-bucket && \
+	cat ./snowflake_credentials.txt
 	rm -f ./snowflake_credentials.txt
 
 # ---------- RUN 2: Add CloudSibyl access ----------
 cloudsibyl:
 	export TF_DATA_DIR=${TF_DATA_DIR} && ${TERRAFORM} init -input=false && \
 	$(TERRAFORM) apply -input=false -auto-approve -var-file="$(TFVARS)" -var="enable_cloudsibyl_access=true"
-	cat ./cloudsibyl_role_info.txt && \
-	cd ~/snowflake-datacollector-terraform/aws-s3-bucket && \
+	cat ./cloudsibyl_role_info.txt
 	rm -f ./cloudsibyl_role_info.txt
 
 runall: snowflake cloudsibyl

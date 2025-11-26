@@ -14,6 +14,8 @@
 # }
 
 resource "local_file" "snowflake_rw_credentials" {
+  count = var.enable_cloudsibyl_access ? 0 : 1
+
   filename = "${path.module}/snowflake_credentials.txt"
 
   content = <<EOF
