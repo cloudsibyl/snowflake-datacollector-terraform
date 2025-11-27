@@ -47,11 +47,5 @@ make cloudsibyl
 ```
 
 8. Retrieve credentials
-You should be able to see the generated credentials in the output
 
-
-
-### Creating blob storage container on Azure:
-
-
-### Creating GCS bucket on GCP:
+    You should be able to see the generated credentials in the output
