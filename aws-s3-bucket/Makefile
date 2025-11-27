@@ -11,7 +11,7 @@ TF_DATA_DIR=/tmp/terraform-data-dir
 TF_BIN_DIR=/tmp/terraform-bin
 TERRAFORM=${TF_BIN_DIR}/terraform
 TERRAFORM_INIT=export TF_DATA_DIR=${TF_DATA_DIR} && ${TERRAFORM} init -input=false > /dev/null
-TOKEN_MSG=Make sure to copy your personal access token now as you will not be able to see this again.
+TOKEN_MSG=Make sure to copy your credentials now as you will not be able to see this again.
 
 # ---------- Install Terraform on Amazon Linux ----------
 init:
