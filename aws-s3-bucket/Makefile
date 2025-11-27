@@ -1,7 +1,7 @@
 # ============================
 #  Terraform Makefile Wrapper
 # ============================
-
+.PHONY: init snowflake cloudsibyl plan destroy
 .SILENT:
 
 # Default tfvars file
