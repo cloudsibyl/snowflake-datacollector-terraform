@@ -11,6 +11,7 @@ TF_DATA_DIR=/tmp/terraform-data-dir
 TF_BIN_DIR=/tmp/terraform-bin
 TERRAFORM=${TF_BIN_DIR}/terraform
 TERRAFORM_INIT=export TF_DATA_DIR=${TF_DATA_DIR} && ${TERRAFORM} init -input=false > /dev/null
+TOKEN_MSG=Make sure to copy your personal access token now as you will not be able to see this again.
 
 # ---------- Install Terraform on Amazon Linux ----------
 init:
@@ -34,7 +35,7 @@ snowflake:
 	$(TERRAFORM) apply -input=false -auto-approve -var-file="$(TFVARS)" -var="enable_cloudsibyl_access=false" > /dev/null && \
 	echo "S3 bucket created." && \
 	echo "Generating Snowflake credentials..." && \
-	echo "Keep these credentials secure as you won't be able to retrieve them again." && \
+	echo "${TOKEN_MSG}" && \
 	cat ./snowflake_credentials.txt && \
 	rm -f ./snowflake_credentials.txt
 
@@ -45,7 +46,7 @@ cloudsibyl:
 	$(TERRAFORM) apply -input=false -auto-approve -var-file="$(TFVARS)" -var="enable_cloudsibyl_access=true" > /dev/null && \
 	echo "CloudSibyl access added." && \
 	echo "Generating CloudSibyl role information..." && \
-	echo "Keep this information secure as you won't be able to retrieve it again." && \
+	echo "${TOKEN_MSG}" && \
 	cat ./cloudsibyl_role_info.txt && \
 	rm -f ./cloudsibyl_role_info.txt
 

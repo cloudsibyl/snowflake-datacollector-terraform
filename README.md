@@ -49,11 +49,8 @@ make cloudsibyl
 ```
 
 8. Retrieve credentials
-You should be able to see the generated credentials in
-```bash
-./cloudsibyl_role_info.txt
-./snowflake_credentials.txt
-```
+You should be able to see the generated credentials in the output
+
 
 
 ### Creating blob storage container on Azure:
