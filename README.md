@@ -9,8 +9,6 @@ Snowflake Data Collector
 | Cloud Providers | Storage Name | Write Authentication Method | Read Authentication Method |
 | :-------------: | :-------------: | :--------------------: | :----------------------: |
 | [AWS](#creating-s3-bucket-on-aws)  | S3 Bucket | IAM user |  Assumed IAM role |
-| [Azure](#creating-blob-storage-container-on-azure)   | Container inside blob storage | TBD |  TBD | 
-| [GCP](#creating-gcs-bucket-on-gcp) | GCS Bucket | TBD |  TBD |
 
 ### Creating S3 bucket on AWS:
 
