@@ -26,6 +26,11 @@ git clone https://github.com/cloudsibyl/snowflake-datacollector-terraform.git
 cd snowflake-datacollector-terraform/aws-s3-bucket
 ```
 
+or this:
+```bash
+git clone https://github.com/cloudsibyl/snowflake-datacollector-terraform.git && cd snowflake-datacollector-terraform/aws-s3-bucket
+```
+
 4. Install Terraform if not installed yet
 ```bash
 make init
