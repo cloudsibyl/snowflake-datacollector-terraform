@@ -13,7 +13,7 @@ Snowflake Data Collector
 ### Creating S3 bucket on AWS:
 
 
-1. Log in to your AWS Console and open CloudShell
+1. Log in to your [AWS Console}(https://aws.amazon.com/console/) and open CloudShell
 
 2. Clone this repository in current or desired directory:
 
